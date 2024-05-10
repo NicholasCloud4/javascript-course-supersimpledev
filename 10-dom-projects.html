@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>DOM Projects</title>
+
+    <style>
+      body {
+        font-family: "Noto Sans";
+      }
+
+      .subscribe-button {
+        border: none;
+        background-color: black;
+        color: white;
+        padding: 10px 15px;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        margin-bottom: 25px;
+      }
+
+      .cost-input {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      .calculate-button {
+        border: none;
+        background-color: green;
+        color: white;
+        padding: 11px 15px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <p>YouTube Subscribe Button</p>
+    <button class="js-subscribe subscribe-button" onclick="subscribe();">
+      Subscribe
+    </button>
+
+    <p>FedEx Shipping Calculator</p>
+    <p>Orders under $40 = +$10 shipping</p>
+    <p>Orders over $40 = FREE shipping</p>
+    <input
+      class="js-cost-input cost-input"
+      type="text"
+      placeholder="Cost of Order"
+      onkeydown="handleCostKeydown(event);"
+    />
+    <button class="calculate-button" onclick="calculateTotal();">
+      Calculate
+    </button>
+    <p class="js-total-cost"></p>
+
+    <script>
+      function handleCostKeydown(event) {
+        console.log(event.key);
+        if (event.key === "Enter") {
+          calculateTotal();
+        }
+      }
+
+      function calculateTotal() {
+        const inputElement = document.querySelector(".js-cost-input");
+        let cost = inputElement.value;
+
+        if (cost < 40) {
+          cost = Number(cost) + 10;
+        }
+
+        document.querySelector(".js-total-cost").innerHTML = `$${cost}`;
+      }
+
+      function subscribe() {
+        const buttonElement = document.querySelector(".js-subscribe");
+
+        if (buttonElement.innerText === "Subscribe") {
+          buttonElement.innerHTML = "Unsubscribe";
+          buttonElement.style.backgroundColor = "red";
+        } else {
+          buttonElement.innerHTML = "Subscribe";
+          buttonElement.style.backgroundColor = "black";
+        }
+      }
+    </script>
+  </body>
+</html>
